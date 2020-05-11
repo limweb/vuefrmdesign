@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <style>
+        /* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+    body {
+        height: 100vh;
+        width: 100vw;
+        background-color: #ECECEC;
+    }
+
+    #app {
+        margin: 0;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        font-family: 'Lato', sans-serif;
+    }
+
+    .filler {
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+        position: absolute;
+    }
+
+    .list {
+        position: absolute;
+        top: 30px;
+        bottom: 30px;
+        left: 30px;
+        right: 300px;
+        width:210mm;
+        height:297mm;
+        box-shadow: 0 0 2px #AAA;
+        background-color: white;
+    }
+
+    :root{
+    --toolbar-width: 230px;
+}
+.toolbar{
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: var(--toolbar-width);
+    height:100%;
+    padding:  15px 15px 0 15px;
+    box-shadow: 0 0 2px #AAA;
+    box-sizing: border-box;
+    background-color: white;
+    margin: 20px 0px 30px 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    min-height: 500px;
+    margin-bottom: 100px;
+}
+.toolbar-wh-row{
+
+    margin-bottom: 20px;
+}
+.toolbar-row-title{
+    width: var(--toolbar-width);
+    font-size: 14px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    margin: 30 30 3px 0;
+    color: #1A173B;
+}
+.toolbar-position-inp, .toolbar-size-inp{
+    width: 90px;
+    font-size: 11px;
+    color: #BBB;
+    font-weight: 300;
+    display: inline-block;
+    position: relative;
+}
+
+.toolbar-size-inp input,.toolbar-position-inp input{
+    width: 70px;
+    display: inline-block;
+    border: 1px solid #bfbfca;
+    margin-top: 2px;
+    height: 16px;
+}
+
+.toolbar-size-inp input[disabled],.toolbar-position-inp input[disabled]{
+    border: 1px solid #dcdce7;
+    color: #AAAAAA;
+}
+
+.position-lock-icon, .size-lock-icon{
+    position: absolute;
+    bottom: 3px;
+    right: 17px;
+    cursor: pointer;
+}
+.size-lock-icon{
+    bottom: 2px;
+    right: -3px;
+}
+
+.toolbar-check-inp{
+    color: #445477;
+    font-size: 13px;
+    width: 180px;
+    display: inline-block;
+    margin: 2px 0;
+}
+.toolbar-row-title+label{
+    margin-top: 5px;
+}
+.toolbar-check-inp input{
+    border: 1px solid #bfbfca;
+}
+.to-top-icon, .to-bottom-icon{
+    margin: 10px 30px;
+    cursor: pointer;
+}
+.vdr {
+    position: absolute;
+    box-sizing: border-box;
+    outline: 2px dashed #d6d6d6;
+}
+.vdr.active:before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    outline: 1px dashed #d6d6d6;
+}
+.vdr-stick {
+    box-sizing: border-box;
+    position: absolute;
+    font-size: 1px;
+    background: #ffffff;
+    border: 1px solid #6c6c6c;
+    box-shadow: 0 0 2px #bbb;
+}
+.inactive .vdr-stick {
+    display: none;
+}
+.vdr-stick-tl, .vdr-stick-br {
+    cursor: nwse-resize;
+}
+.vdr-stick-tm, .vdr-stick-bm {
+    left: 50%;
+    cursor: ns-resize;
+}
+.vdr-stick-tr, .vdr-stick-bl {
+    cursor: nesw-resize;
+}
+.vdr-stick-ml, .vdr-stick-mr {
+    top: 50%;
+    cursor: ew-resize;
+}
+.vdr-stick.not-resizable{
+    display: none;
+}
+.flex {
+    display: flex;
+    justify-content: space-around;
+}
+
+@media print {
+ .toolbar {
+     display:none;
+ }
+}
+</style>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+    </div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
